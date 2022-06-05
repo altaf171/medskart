@@ -1,4 +1,7 @@
+import re
 from django.contrib.auth.models import BaseUserManager
+from django.core.validators import RegexValidator
+from django.forms import ValidationError
 
 
 class UserManager(BaseUserManager):
@@ -10,10 +13,16 @@ class UserManager(BaseUserManager):
             raise ValueError('Users must have an email address')
 
         user = self.model(
-            name = name,
+            name=name,
             email=self.normalize_email(email),
-            **extra_fields 
+            **extra_fields
         )
+
+        
+        regex_pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$"
+        
+        if not re.search(regex_pattern, password):
+            raise ValidationError(message="Enter valid password")
 
         user.set_password(password)
         user.save(using=self._db)
@@ -28,7 +37,7 @@ class UserManager(BaseUserManager):
             name=name,
             password=password,
             **extra_fields
-             
+
         )
         user.is_admin = True
         user.save(using=self._db)
