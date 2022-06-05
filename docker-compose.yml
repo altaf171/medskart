@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  medskart:
+    image: medskart
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    env_file:
+      - django_secretkey.env
+    ports:
+      - 8000:8000
+    volumes:
+      - ./app:/app
