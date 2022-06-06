@@ -1,14 +1,27 @@
 version: '3.4'
-
 services:
-  medskart:
-    image: medskart
+  web:
+    image: webapp
     build:
       context: .
       dockerfile: ./Dockerfile
     env_file:
-      - django_secretkey.env
+      - django_dev.env
     ports:
       - 8000:8000
     volumes:
       - ./app:/app
+    depends_on:
+      - db
+
+  db:
+    image: postgres:bullseye
+    volumes:
+      - postgres_data:/var/lib/postgres/data/
+    environment:
+      - POSTGRES_DB=app
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=secretpassword
+
+volumes:
+  postgres_data:

@@ -23,5 +23,7 @@
 **/obj
 **/secrets.dev.yaml
 **/values.dev.yaml
-**/django_secretkey.env
+**/django_dev.env
+**/docker-bak/
+
 README.md

@@ -153,3 +153,5 @@ dmypy.json
 .pytype/
 cython_debug/
 django_secretkey.env
+django_dev.env
+docker-bak/
