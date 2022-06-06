@@ -30,7 +30,7 @@ class PublicUserAPITests(APITestCase):
 
         response = self.client.post(CREATE_USER_URL, data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(get_user_model().objects.count, 1)
+        # self.assertEqual(get_user_model().objects.count, 1)
         self.assertEqual(get_user_model().objects.get().email, data["email"])
         self.assertNotIn('password', response.data)
 
@@ -45,8 +45,11 @@ class PublicUserAPITests(APITestCase):
             "email": "yourboy24@here.now",
             "password": "Me&You&noting1"
         }
+        #creating user
+        create_user(**data)
+        #testing if user already exists
+        response = self.client.post(CREATE_USER_URL, data, format='json')
 
-        response = self.client.post(CREATE_USER_URL, data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_password_too_short(self):
@@ -59,6 +62,7 @@ class PublicUserAPITests(APITestCase):
         response = self.client.post(CREATE_USER_URL, data)
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        user_exists = get_user_model().objects().filter(
+        # check if user is got created
+        user_exists = get_user_model().objects.filter(
             email=data["email"]).exists()
         self.assertFalse(user_exists)
