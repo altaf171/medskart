@@ -1,16 +1,16 @@
 version: '3.4'
 services:
   web:
-    image: webapp
     build:
       context: .
-      dockerfile: ./Dockerfile
-    env_file:
-      - django_dev.env
     ports:
-      - 8000:8000
+      - "8000:8000"
+    container_name: web
+    env_file:
+      - .env
     volumes:
       - ./app:/app
+    command: sh -c "python manage.py runserver 0.0.0.0:8000"
     depends_on:
       - db
 
@@ -25,3 +25,4 @@ services:
 
 volumes:
   postgres_data:
+

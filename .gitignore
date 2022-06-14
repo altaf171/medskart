@@ -153,5 +153,8 @@ dmypy.json
 .pytype/
 cython_debug/
 django_secretkey.env
-django_dev.env
-docker-bak/
+.env
+
+.gitignore
+nginx/certs/localhost.key
+nginx/certs/localhost.crt
