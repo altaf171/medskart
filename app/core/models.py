@@ -1,7 +1,10 @@
 
+import random
 from django.db import models
-from django.forms import ValidationError
+import string
+from django.urls import reverse
 from django.utils.translation import gettext as _
+from django.utils.text import slugify
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.core.validators import RegexValidator, EmailValidator, MinLengthValidator, MaxLengthValidator
 from core.user_manager import UserManager
@@ -15,8 +18,9 @@ class MinLengthValidatorNoSpace(MinLengthValidator):
         x = x.strip()
         return len(x)
 
+
 class User(AbstractBaseUser, PermissionsMixin):
-    name = models.CharField(_("full name"), max_length=30,
+    name = models.CharField(_("full name"), default='', max_length=30,
                             validators=[
                                 MinLengthValidatorNoSpace(
                                     3, 'name must be minimum 3 charector long'),
@@ -31,6 +35,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         unique=True,
         validators=[EmailValidator, ]
     )
+
+    slug = models.SlugField(_("slug"), default="", unique=True)
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
@@ -50,6 +56,15 @@ class User(AbstractBaseUser, PermissionsMixin):
     def has_module_perms(self, app_label):
         "Does the user have permissions to view the app `app_label`?"
         return True
+
+    def get_absolute_url(self):
+        return reverse("me", kwargs={"slug": self.slug})
+    
+
+    def save(self, *args, **kwargs):
+        # slug with name and 4 char random string
+        self.slug = slugify(self.name) + ''.join( random.choice(string.ascii_lowercase) for i in range(4)) 
+        return super().save(*args, **kwargs)
 
     @property
     def is_staff(self):

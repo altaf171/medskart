@@ -5,7 +5,7 @@ __pycache__/
 
 # C extensions
 *.so
-
+.vscode/
 # Distribution / packaging
 .Python
 build/
@@ -158,3 +158,5 @@ django_secretkey.env
 .gitignore
 nginx/certs/localhost.key
 nginx/certs/localhost.crt
+nginx/default.conf
+nginx/Dockerfile

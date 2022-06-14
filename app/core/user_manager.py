@@ -22,12 +22,13 @@ class UserManager(BaseUserManager):
         regex_pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$"
         
         if not re.search(regex_pattern, password):
-            raise ValidationError(message="Enter valid password")
+            raise ValidationError(message="Enter 8 or longer digit complex password.")
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
+    
     def create_superuser(self, name, email, password=None, **extra_fields):
         """
         Creates and saves a superuser with the given nmae, email and password.

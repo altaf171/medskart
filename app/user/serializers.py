@@ -8,16 +8,6 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     """ 🪢 (❁´◡`❁)  serializer for users object  (❁´◡`❁) 🪢 """
 
-    # password = serializers.CharField(
-    #     source = 'user',
-    #     write_only=True,
-    #     required=True,
-    #     help_text='Leave empty if no change needed',
-    #     style={'input_type': 'password', 'placeholder': 'Password'},
-    #     validators = [password_complex_validator,]
-
-    # )
-
     class Meta:
         model =  User
         fields = ['name','email', 'password']
@@ -28,5 +18,14 @@ class UserSerializer(serializers.ModelSerializer):
 
         return User.objects.create_user(**validated_data)
 
+    def update(self, instance, validated_data):
+        """✍️(◔◡◔) updating user if password update then encrypting it first ┬┴┬┴┤(･_├┬┴┬┴"""
+        password = validated_data.pop("password", None)
+        user = super().update(instance, validated_data)
+        if password:
+            user.set_password(password)
+            user.save()
+
+        return user
     
     
