@@ -1,8 +1,6 @@
 import os
 from pathlib import Path
 
-import django
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -29,8 +27,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'djmoney',
     'core.apps.CoreConfig',
     'user.apps.UserConfig',
+    'store.apps.StoreConfig',
 ]
 
 MIDDLEWARE = [
@@ -115,6 +115,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = 'static/'
+MEDIA_ROOT = 'media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
