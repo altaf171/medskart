@@ -2,8 +2,9 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+migrations
 # C extensions
+
 *.so
 .vscode/
 # Distribution / packaging
@@ -155,7 +156,7 @@ cython_debug/
 django_secretkey.env
 .env
 
-.gitignore
+*.gitignore
 nginx/certs/localhost.key
 nginx/certs/localhost.crt
 nginx/default.conf
