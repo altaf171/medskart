@@ -161,3 +161,7 @@ nginx/certs/localhost.key
 nginx/certs/localhost.crt
 nginx/default.conf
 nginx/Dockerfile
+
+media/
+
+temp.py

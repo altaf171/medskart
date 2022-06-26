@@ -6,6 +6,7 @@ from django.urls import reverse
 
 # Create your models here.
 
+
 class Prescription(models.Model):
     """ for what drug is prescribed """
     prescription_name = models.CharField(_("Prescription name"), max_length=50)
@@ -17,19 +18,23 @@ class Prescription(models.Model):
     def __str__(self):
         return self.prescription_name
 
-class Compound(models.Model):
-    """ model to store info about medicine chemical compound  """
 
-    compound_name = models.CharField(_("Compund Name"), max_length=50)
-    compound_power = models.CharField(_("varient power"), max_length=50)
+class Compound(models.Model):
+    """ 
+    model to store info about medicine chemical compound name, power and concentration  
+
+    """
+
+    name = models.CharField(_("Compund Name"), max_length=50)
+    power_concent = models.CharField(
+        _("Power or Concentration"), max_length=20, blank=True,default='')
 
     class Meta:
         verbose_name = _("Compound")
         verbose_name_plural = _("Compounds")
 
     def __str__(self):
-        return self.compound_name
-
+        return self.name + " " + self.power_concent
 
 
 class Drug(models.Model):
@@ -41,11 +46,11 @@ class Drug(models.Model):
 
     compounds = models.ManyToManyField(
         "store.Compound", verbose_name=_("compounds"))
-        
+
     prescription = models.ForeignKey(Prescription, verbose_name=_(
         "prescription"), on_delete=models.CASCADE, null=True, blank=True)
 
-    require_Rx = models.BooleanField(_("is Rx required"), default=False)
+    require_rx = models.BooleanField(_("is Rx required"), default=False)
 
     mrp = MoneyField(_("mrp"), max_digits=19,
                      decimal_places=4, default_currency='INR')
@@ -73,15 +78,13 @@ class DrugImage(models.Model):
         verbose_name_plural = _("Drug Images")
 
 
-
-
 class Stock(models.Model):
     """
     stores no of drugs with batch no
     a drug might have diffrent batch no in diffrent quantity 
 
     """
-    stock = models.IntegerField(_("stock"), default=0)
+    items = models.IntegerField(_("items"), default=0)
     batch_no = models.CharField(_("batch no"), max_length=30)
     drug = models.ForeignKey(Drug, on_delete=models.CASCADE)
 
@@ -90,7 +93,40 @@ class Stock(models.Model):
         verbose_name_plural = _("stocks")
 
     def __str__(self):
-        return str(self.stock) + " " + self.batch_no
+        return str(self.items) + " " + self.batch_no
 
-    def get_absolute_url(self):
-        return reverse("stock_detail", kwargs={"pk": self.pk})
+
+class ProductDetails(models.Model):
+    """
+    (。・ω・。) Optional (。・ω・。)
+
+    some extra detail about drug 
+
+    """
+    drug = models.OneToOneField(
+        Drug, on_delete=models.CASCADE, primary_key=True)
+
+    net_qty = models.IntegerField(_("net quantity"), default=1)
+    item_weight = models.FloatField(
+        _("Item Weight"), max_length=10)
+
+    ingredient = models.CharField(_("Ingredient"), max_length=50)
+
+    customer_care_email = models.EmailField(
+        _("customer care email"), max_length=254, default='')
+    manufacturer_marketer = models.CharField(
+        _("manufacturer / marketer"), max_length=50)
+    manufacturer = models.CharField(
+        _("manufacturer"), max_length=50, default='')
+    importer = models.CharField(
+        _("drug importer"), max_length=50, default='')
+
+    direction_of_use = models.TextField(
+        _("Direction of use"), default='')
+
+    class Meta:
+        verbose_name = _("Product_details")
+        verbose_name_plural = _("Product_details")
+
+    def __str__(self):
+        return str(self.net_qty) + " " + str(self.item_weight) + " " + self.ingredient
