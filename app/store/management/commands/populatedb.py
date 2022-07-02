@@ -19,8 +19,11 @@ def populating(data):
 
     setlocale(LC_NUMERIC, 'en_IN')
 
-    prescription = Prescription(prescription_name=data["prescription"])
-    prescription.save()
+    prescription = Prescription.objects.get_or_create(prescription_name=data["prescription"])
+    #get_or_ create retuns tuple of query_object and True (if created)
+    #next line is used to extract object
+    if type(prescription) is tuple:
+         prescription =  prescription[0]
 
     # drug object
     rx = True

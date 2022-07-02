@@ -1,15 +1,14 @@
-from typing import final
+from django.utils.text import slugify
 from djmoney.models.fields import MoneyField
 from django.db import models
 from django.utils.translation import gettext as _
 from django.urls import reverse
 
-# Create your models here.
-
 
 class Prescription(models.Model):
     """ for what drug is prescribed """
     prescription_name = models.CharField(_("Prescription name"), max_length=50)
+    slug = models.SlugField(_("slug"), default='')
 
     class Meta:
         verbose_name = _("Prescription")
@@ -18,6 +17,13 @@ class Prescription(models.Model):
     def __str__(self):
         return self.prescription_name
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.prescription_name)
+        return super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("prescription_detail", kwargs={"slug": self.slug})
+    
 
 class Compound(models.Model):
     """ 
@@ -27,7 +33,7 @@ class Compound(models.Model):
 
     name = models.CharField(_("Compund Name"), max_length=50)
     power_concent = models.CharField(
-        _("Power or Concentration"), max_length=20, blank=True,default='')
+        _("Power or Concentration"), max_length=20, blank=True, default='')
 
     class Meta:
         verbose_name = _("Compound")
@@ -57,6 +63,8 @@ class Drug(models.Model):
     final_price = MoneyField(
         _("final price"), max_digits=19, decimal_places=4, default_currency='INR')
 
+    slug = models.SlugField(_("slug"), default='', blank=True, unique=True)
+
     class Meta:
         verbose_name = _("drug")
         verbose_name_plural = _("drugs")
@@ -64,18 +72,30 @@ class Drug(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        return super().save(*args, **kwargs)
+
     def get_absolute_url(self):
-        return reverse("drug_detail", kwargs={"pk": self.pk})
+        return reverse("drug_detail", kwargs={"slug": self.slug})
 
 
 class DrugImage(models.Model):
     """ model to store medicine's images """
-    image = models.ImageField(_("image"), upload_to="drug/images")
+    image = models.ImageField(_("image"), upload_to="drug/images", )
     drug = models.ForeignKey(Drug, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _("Drug Image")
         verbose_name_plural = _("Drug Images")
+
+    def __str__(self):
+        return self.image.url
+
+    def get_absolute_url(self):
+        return reverse("drugimage-detail", kwargs={"pk": self.pk})
+    
+
 
 
 class Stock(models.Model):
