@@ -8,7 +8,7 @@ from django.urls import reverse
 class Prescription(models.Model):
     """ for what drug is prescribed """
     prescription_name = models.CharField(_("Prescription name"), max_length=50)
-    slug = models.SlugField(_("slug"), default='')
+    prescription_slug = models.SlugField(_("slug"), default='')
 
     class Meta:
         verbose_name = _("Prescription")
@@ -18,11 +18,11 @@ class Prescription(models.Model):
         return self.prescription_name
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.prescription_name)
+        self.prescription_slug = slugify(self.prescription_name)
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse("prescription_detail", kwargs={"slug": self.slug})
+        return reverse("prescription_detail", kwargs={"slug": self.prescription_slug})
     
 
 class Compound(models.Model):
@@ -63,7 +63,7 @@ class Drug(models.Model):
     final_price = MoneyField(
         _("final price"), max_digits=19, decimal_places=4, default_currency='INR')
 
-    slug = models.SlugField(_("slug"), default='', blank=True, unique=True)
+    drug_slug = models.SlugField(_("slug"), default='', blank=True, unique=True)
 
     class Meta:
         verbose_name = _("drug")
@@ -73,11 +73,11 @@ class Drug(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
+        self. drug_slug = slugify(self.name)
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse("drug_detail", kwargs={"slug": self.slug})
+        return reverse("drug_detail", kwargs={"slug": self. drug_slug})
 
 
 class DrugImage(models.Model):

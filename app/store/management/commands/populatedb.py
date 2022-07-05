@@ -68,12 +68,14 @@ def populating(data):
             compound_name = c
             compound_power = ''
 
-            compound = Compound(
+            compound = Compound.objects.get_or_create(
                 name=compound_name,
-                power_concent=compound_power
-            )
+                power_concent=compound_power)
 
-            compound.save()
+            # compound.save()
+            if isinstance(compound, tuple):
+                compound = compound[0]
+                
             drug.compounds.add(compound)
 
     # adding random number of stock and random data
