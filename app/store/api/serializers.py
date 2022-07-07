@@ -1,7 +1,13 @@
 
-from cgitb import lookup
+from pyexpat import model
 from rest_framework import serializers
-from store.models import Prescription, Drug, DrugImage
+from .utils import serializer_utils
+from store.models import (
+    Compound,
+    Prescription,
+    Drug,
+    DrugImage,
+)
 
 
 class DrugImageModelSerializer(serializers.ModelSerializer):
@@ -11,57 +17,46 @@ class DrugImageModelSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = DrugImage
-        fields = ['image']
+        fields = ["image", ]
 
 
 class DrugModelSerializer(serializers.ModelSerializer):
-    images = DrugImageModelSerializer(
-        source='drugimage_set', many=True, read_only=True)
-    # images = serializers.HyperlinkedIdentityField(
-    #     source='drugimage_set', many=True,
-    #     view_name='image-detail'
-    #     )
+    url = serializer_utils.ParameterisedHyperlinkedIdentityField(
+        view_name="drug-detail",
+        lookup_fields=(('prescription.slug', 'prescription_slug'),
+                       ('slug', 'medicine_slug')),
 
-    # url = serializers.HyperlinkedIdentityField(
-    #     view_name="drug-detail",
-    #     lookup_field="drug_slug",
-    # )
+    )
+
+    images = DrugImageModelSerializer(
+        source='drugimage_set',
+        many=True,
+        read_only=True,
+    )
+
+    compounds = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = Drug
-        fields = [ 'images', 'drug_slug', 'name']
-        extra_kwargs = {'url': {'lookup_field': 'drug_slug'}, }
+        fields = ['url', 'images', 'name', 'compounds' ]
 
 
 class PrescriptionModelSerializer(serializers.ModelSerializer):
     medicines = DrugModelSerializer(
         source='drug_set', many=True, read_only=True)
 
-    # medicines = serializers.HyperlinkedRelatedField(
-    #     source="drug_set",
-    #     view_name="drug-detail",
-    #     many=True,
-    #     read_only = True,
+    url = serializer_utils.ParameterisedHyperlinkedIdentityField(
+        view_name="prescription-detail",
+        lookup_fields=(('slug', 'prescription_slug'),)
 
-    # )
-
-    # url = serializers.HyperlinkedIdentityField(
-    #     view_name="prescription-detail",
-    #     lookup_field="prescription_slug",
-    # )
+    )
 
     class Meta:
         model = Prescription
-        # fields = ['url', 'id', 'prescription_name', 'slug', 'medicines']
-        fields = ['id', 'prescription_name',
-                  'prescription_slug', 'medicines']
-
-        # lookup_field="slug"
-        # extra_kwargs = {'url': {'lookup_field': 'prescription_slug'}}
+        fields = ['url', 'name', 'medicines']
 
 
-# medicines = serializers.HyperlinkedRelatedField(
-#         source="drug_set", view_name='prescription-drugs-detail',
-#         lookup_field='slug', many=True, read_only=True)
-        # lookup_field = 'slug'
-        # extra_kwargs = {'url': {'lookup_field': 'slug'}}
+class CompoundModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Compound
+        fields = ['name']

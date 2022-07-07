@@ -1,28 +1,30 @@
+from unicodedata import name
 from django.utils.text import slugify
 from djmoney.models.fields import MoneyField
 from django.db import models
 from django.utils.translation import gettext as _
-from django.urls import reverse
+# from django.urls import reverse
+from rest_framework.reverse import reverse
 
 
 class Prescription(models.Model):
     """ for what drug is prescribed """
-    prescription_name = models.CharField(_("Prescription name"), max_length=50)
-    prescription_slug = models.SlugField(_("slug"), default='')
-
+    name = models.CharField(_("Prescription name"), max_length=50, unique=True)
+    slug = models.SlugField(_("Prescription slug"))
+ 
     class Meta:
         verbose_name = _("Prescription")
         verbose_name_plural = _("Prescriptions")
 
     def __str__(self):
-        return self.prescription_name
+        return self.name
 
     def save(self, *args, **kwargs):
-        self.prescription_slug = slugify(self.prescription_name)
+        self.slug = slugify(self.name)
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse("prescription_detail", kwargs={"slug": self.prescription_slug})
+        return reverse("prescription-detail", kwargs={"prescription_slug": self.slug})
     
 
 class Compound(models.Model):
@@ -31,17 +33,19 @@ class Compound(models.Model):
 
     """
 
-    name = models.CharField(_("Compund Name"), max_length=50)
-    power_concent = models.CharField(
-        _("Power or Concentration"), max_length=20, blank=True, default='')
-
+    name = models.CharField(_("Compund Name"), max_length=50, unique=True)
+    slug = models.SlugField(_("Compound Slug"), blank=True)
+    
     class Meta:
         verbose_name = _("Compound")
         verbose_name_plural = _("Compounds")
 
     def __str__(self):
-        return self.name + " " + self.power_concent
+        return self.name 
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        return super().save(*args, **kwargs)
 
 class Drug(models.Model):
     """ model class for medicine  """
@@ -63,9 +67,10 @@ class Drug(models.Model):
     final_price = MoneyField(
         _("final price"), max_digits=19, decimal_places=4, default_currency='INR')
 
-    drug_slug = models.SlugField(_("slug"), default='', blank=True, unique=True)
+    slug = models.SlugField(_("drug slug"))
 
     class Meta:
+        unique_together= (('name','varient_type'),)
         verbose_name = _("drug")
         verbose_name_plural = _("drugs")
 
@@ -73,16 +78,16 @@ class Drug(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        self. drug_slug = slugify(self.name)
+        self.slug = slugify(self.name)
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse("drug_detail", kwargs={"slug": self. drug_slug})
+        return reverse("drug-detail", kwargs={"prescription_slug":self.prescription.slug, "drug_slug": self.slug})
 
 
 class DrugImage(models.Model):
     """ model to store medicine's images """
-    image = models.ImageField(_("image"), upload_to="drug/images", )
+    image = models.ImageField(_("image"), upload_to="drug/images" )
     drug = models.ForeignKey(Drug, on_delete=models.CASCADE)
 
     class Meta:
@@ -93,7 +98,7 @@ class DrugImage(models.Model):
         return self.image.url
 
     def get_absolute_url(self):
-        return reverse("drugimage-detail", kwargs={"pk": self.pk})
+        return reverse("image-detail", kwargs={"pk": self.pk})
     
 
 

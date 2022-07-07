@@ -1,5 +1,4 @@
-from email.mime import image
-import io
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from store.models import Drug, Compound, DrugImage, Stock, ProductDetails
 
@@ -29,14 +28,13 @@ class DrugModelTest(TestCase):
 
         """
         compound = Compound(
-            name="paracetamol",
-            power_content="500"
+            name="paracetamol 650"
 
         )
         compound.save()
         # comp_from_db = Compound.objects.all()
         # print(comp_from_db[0])
-        self.assertEqual(compound.compound_name, "paracetamol")
+        self.assertEqual(compound.name, "paracetamol 650")
 
     def test_compound_and_drug(self):
         """
@@ -44,14 +42,13 @@ class DrugModelTest(TestCase):
 
         """
         compound = Compound(
-            compound_name="paracetamol",
-            compound_power="500"
+            name="paracetamol 650",
 
         )
         compound.save()
 
         drug = Drug(
-            name="dolo 500",
+            name="dolo 650",
             varient_type="pill 10 strip",
             mrp=20.0,
             final_price=18.00,
@@ -59,9 +56,9 @@ class DrugModelTest(TestCase):
 
         drug.save()
         drug.compounds.add(compound)
-        # print(drug.compounds.all()[0].compound_name)
-        self.assertEqual(drug.name, "dolo 500")
-        self.assertEqual(drug.compounds.all()[0].compound_name, "paracetamol")
+        # print(drug.compounds.all()[0].name)
+        self.assertEqual(drug.name, "dolo 650")
+        self.assertEqual(drug.compounds.all()[0].name, "paracetamol 650")
 
     def test_stock_drug(self):
         """
@@ -128,11 +125,13 @@ class DrugModelTest(TestCase):
        
         url = "https://www.netmeds.com/images/product-v1/600x600/838583/jilazo_100mg_injection_5ml_0_0.jpg"
 
-        #im = Image.open(requests.get(url, stream=True).raw)
-        im = requests.get(url, stream=True)
+        response = requests.get(url, stream=True)
+        file_name = url.split('/')[-1]
         drug_image = DrugImage(
-            image = Image.open(io.BytesIO(im.content)),
+            image = SimpleUploadedFile(
+                file_name, content=response.content, content_type="image/jpeg"),
             drug = drug
         )
         drug_image.save()
-        self.assertTrue(hasattr(drug,"drugimage"))
+        self.assertTrue(DrugImage.objects.all().count())
+        self.assertTrue(hasattr(drug,"drugimage_set"))
