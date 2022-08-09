@@ -9,7 +9,7 @@ CREATE_USER_URL = reverse('user:create')
 # JWT token url
 TOKEN_URL = reverse('user:token_obtain_pair')
 
-ME_URL = reverse("user:me")
+PROFILE_URL = reverse("user:profile")
 
 
 def create_user(**prams):
@@ -146,7 +146,7 @@ class PublicUserAPITests(APITestCase):
     def test_retrieve_user_unauthorized(self):
         """test that authentication is required for user to see their profile"""
 
-        response = self.client.get(ME_URL)
+        response = self.client.get(PROFILE_URL)
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
@@ -166,7 +166,7 @@ class PrivateUserAPITests(TestCase):
     def test_retrieve_profile_success(self):
         """ test that retrieving profile for user """
 
-        response = self.client.get(ME_URL)
+        response = self.client.get(PROFILE_URL)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data, {
             "name": self.user.name,
@@ -175,14 +175,14 @@ class PrivateUserAPITests(TestCase):
 
     def test_me_post_not_allowed(self):
         """ Test that post method is not allowed on user """
-        response = self.client.post(ME_URL, {})
+        response = self.client.post(PROFILE_URL, {})
         self.assertEqual(response.status_code,
                          status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def test_update_user_profile(self):
         """ Test that user profile get updated """
         data  = {"name":"me mine", "password":"Me#My123*"}
-        response = self.client.patch(ME_URL,data)
+        response = self.client.patch(PROFILE_URL,data)
         self.user.refresh_from_db()
 
         self.assertEqual(self.user.name, data["name"])

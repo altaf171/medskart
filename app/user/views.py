@@ -1,6 +1,6 @@
 
 from django.shortcuts import get_object_or_404
-from rest_framework.generics import CreateAPIView, RetrieveUpdateAPIView
+from rest_framework.generics import CreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.authentication import BasicAuthentication
@@ -17,7 +17,7 @@ class UserCreateAPIView(CreateAPIView):
     serializer_class = UserSerializer
 
 
-class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
+class UserRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
     authentication_classes = [JWTAuthentication, BasicAuthentication]
     permission_classes = [IsAuthenticated]
