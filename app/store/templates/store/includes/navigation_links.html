@@ -1,8 +1,12 @@
 <style>
-    .nav-second {
 
-        background: linear-gradient(180deg, rgba(135, 135, 135, 0.2) 3%, rgba(135, 135, 135, 0.05) 100%);
-    }
+
+    /*.nav-second {
+
+       // background: linear-gradient(180deg, rgba(135, 135, 135, 0.2) 3%, rgba(135, 135, 135, 0.05) 100%);
+    } */
+
+        
 
     .nav-second-link {
         text-decoration: none;
@@ -12,23 +16,45 @@
     }
 
     .nav-second-link:hover {
-        color: rgba(20, 180, 130, 0.8);
-        border-bottom: solid 1px rgba(20, 180, 130, 0.4);
+        /* color: rgba(20, 180, 130, 0.8); */
+        background-color: rgba(20, 180, 130, 0.1);
+        /* border-bottom: solid 1px rgba(20, 180, 130, 0.4); */
+    }
+
+
+    @media (max-width: 768px) {
+        .nav-second-link {
+            min-width: 100vw;
+            margin-left: calc(var(--bs-gutter-x) * -.5);
+            padding-left: calc(var(--bs-gutter-x) * .5);
+
+            padding-top: 8px;
+            padding-bottom: 8px;
+
+        }
     }
 </style>
 <div class="nav-second navbar-expand-md">
-    <div class="container-fluid pb-1">
+    <div class="container-fluid pb-1 ">
         <div class="collapse multi-collapse collapse-horizontal navbar-collapse" id="nav-second-collapse">
 
-            <nav class="nav" style="width: 80vw;">
+            <nav class="nav" style="width: 100%;">
 
-                <a class="nav-second-link" href="#">link0</a>
+                <!-- <a class="nav-second-link" href="#">link0</a>
                 <a class="nav-second-link" href="#">Link1gksagaaga</a>
                 <a class="nav-second-link" href="#">Link21pk</a>
                 <a class="nav-second-link">link3jajf</a>
                 <a class="nav-second-link">link4</a>
-                <a class="nav-second-link">link5ss</a>
-            
+                <a class="nav-second-link">link5ss</a> -->
+                {% for link in navigation_links %}
+
+                <a class="nav-second-link" href="{{ link.link }}">
+                    {{ link.text }}
+                </a>
+
+                {% endfor %}
+
+
             </nav>
         </div>
     </div>

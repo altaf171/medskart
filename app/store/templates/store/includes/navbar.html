@@ -1,10 +1,10 @@
 <style>
-
-    .navbar>.container {
-        background: rgba(20, 181, 130, 0.2);
+    .navbar {
+        background: rgba(20, 181, 130, 0.5);
         box-shadow: -1px -2px 5px 1px rgba(20, 181, 130, 0.3) inset, -1px -2px 5px 1px rgba(20, 181, 130, 0.1) inset, -1px -2px 5px 1px rgba(20, 181, 130, 0.05) inset;
 
     }
+
 
     .navbar-brand {
         color: rgb(20, 130, 85);
@@ -25,6 +25,8 @@
 
     a.nav-link {
         padding: 0.3em 0.1em;
+        width: 100%;
+        min-width: fit-content;
     }
 
     a.nav-link:hover {
@@ -45,7 +47,7 @@
     }
 
     .search-form {
-    
+
         width: 100%;
         box-shadow: 2px 2px 5px 0px rgba(20, 180, 129, 0.5);
     }
@@ -63,7 +65,7 @@
 
     }
 
-    
+
     .search-input-btn:hover {
         outline: none;
         border-left: solid 1px;
@@ -72,76 +74,95 @@
     }
 
 
+    .navbar-toggler,
+    .navbar-toggler:focus,
+    .navbar-toggler:active {
+        outline: none;
+        border: 0px;
+    }
 
+    @media (max-width: 890px) {
+        .nav-link span {
+            display: none;
+        }
+    }
 
     @media (max-width: 768px) {
         .search-form {
             padding-right: 1em;
-            min-width: 95vw;
+            /* margin: 0.1em 0.5em; */
+            width: 95vw;
 
         }
 
         .search-input {
-            min-width: 95%;
+            width: 98%;
         }
-
+        .search-input-btn {
+            width: 1.8rem;
+        }
 
         .nav-link {
             margin-top: 5px;
             margin-left: 0;
-            min-width: 95%;
+            /* min-width: 95%; */
             text-align: start;
-
+            min-width: 95vw;
             box-shadow: 1px 2px 10px 1px rgba(20, 180, 129, 0.150);
 
         }
+        #nav-collapse1{
+            min-width:95vw;
+        }
 
     }
+
 </style>
-<nav class="navbar navbar-expand-md bg-light p-0 ">
-    <div class="container text-center pe-5 pb-1" style="max-width: 1240px;">
-
-
+<nav class="navbar navbar-expand-md p-0 ">
+    <div class="container-fluid  text-center pe-5 pb-1" style="max-width: 1280px;">
         <a class="navbar-brand " href="#"><span>A</span>Pharma</a>
         <div class="ms-md-3">
             <form class="search-form d-flex " role="search">
                 <input class="search-input " type="search" placeholder="Search" aria-label="Search">
                 <button class="search-input-btn btn" type="submit">
-                    <svg class="ms-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                        stroke-width="2" style="width: 1.3em; height: 1.3em;">
+                    <svg class="ms-0 ms-md-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2" style="width: 1.3em; height: 1.3em;">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                 </button>
             </form>
         </div>
-        <button  class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapse"
-            aria-expanded="false" aria-controls="nav-collapse1 nav-collapse2 nav-second-collapse" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="nav-link collapse multi-collapse navbar-collapse px-1 ms-0 ms-md-3 " id="nav-collapse1"
-            href="#">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                stroke-width="2" style="width: 2em; height: 2em;">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            Sign in / Sign up
+        <div class="text-start">
 
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapse"
+                aria-expanded="false" aria-controls="nav-collapse1 nav-second-collapse" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
 
-            <!-- signin and signup | user name -->
-        </a>
+        <div class="collapse multi-collapse navbar-collapse " id="nav-collapse1">
 
-        <a class="nav-link collapse multi-collapse  navbar-collapse px-1 ms-0 ms-md-3" id="nav-collapse2" href="#">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                stroke-width="2" style="width: 2em; height: 2em;">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
+            <a class="nav-link  px-1 ms-0 ms-md-3" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    stroke-width="2" style="width: 2em; height: 2em;">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Sign in / Sign up</span>
+                <!-- signin and signup | user name -->
+            </a>
 
-            Cart
-        </a>
+            <a class="nav-link px-1 ms-0 ms-md-3" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    stroke-width="2" style="width: 2em; height: 2em;">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                <span>Cart</span>
+            </a>
 
+        </div>
 
 
     </div>

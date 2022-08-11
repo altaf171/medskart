@@ -11,7 +11,7 @@ class Prescription(models.Model):
     """ for what drug is prescribed """
     name = models.CharField(_("Prescription name"), max_length=50, unique=True)
     slug = models.SlugField(_("Prescription slug"))
- 
+
     class Meta:
         verbose_name = _("Prescription")
         verbose_name_plural = _("Prescriptions")
@@ -25,7 +25,7 @@ class Prescription(models.Model):
 
     def get_absolute_url(self):
         return reverse("prescription-detail", kwargs={"prescription_slug": self.slug})
-    
+
 
 class Compound(models.Model):
     """ 
@@ -35,17 +35,18 @@ class Compound(models.Model):
 
     name = models.CharField(_("Compund Name"), max_length=50, unique=True)
     slug = models.SlugField(_("Compound Slug"), blank=True)
-    
+
     class Meta:
         verbose_name = _("Compound")
         verbose_name_plural = _("Compounds")
 
     def __str__(self):
-        return self.name 
+        return self.name
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         return super().save(*args, **kwargs)
+
 
 class Drug(models.Model):
     """ model class for medicine  """
@@ -70,7 +71,7 @@ class Drug(models.Model):
     slug = models.SlugField(_("drug slug"))
 
     class Meta:
-        unique_together= (('name','varient_type'),)
+        unique_together = (('name', 'varient_type'),)
         verbose_name = _("drug")
         verbose_name_plural = _("drugs")
 
@@ -82,12 +83,12 @@ class Drug(models.Model):
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse("drug-detail", kwargs={"prescription_slug":self.prescription.slug, "drug_slug": self.slug})
+        return reverse("drug-detail", kwargs={"prescription_slug": self.prescription.slug, "drug_slug": self.slug})
 
 
 class DrugImage(models.Model):
     """ model to store medicine's images """
-    image = models.ImageField(_("image"), upload_to="drug/images" )
+    image = models.ImageField(_("image"), upload_to="drug/images")
     drug = models.ForeignKey(Drug, on_delete=models.CASCADE)
 
     class Meta:
@@ -99,8 +100,6 @@ class DrugImage(models.Model):
 
     def get_absolute_url(self):
         return reverse("image-detail", kwargs={"pk": self.pk})
-    
-
 
 
 class Stock(models.Model):
@@ -155,3 +154,24 @@ class ProductDetails(models.Model):
 
     def __str__(self):
         return str(self.net_qty) + " " + str(self.item_weight) + " " + self.ingredient
+
+
+# models for ui elements
+
+class NavigationLink(models.Model):
+    """
+    store links for second navigation
+
+    """
+    text = models.CharField(_("link text "), max_length=20)
+    link = models.CharField(_("link"), max_length=100)
+    
+    class Meta:
+        verbose_name = _("NavigationLink")
+        verbose_name_plural = _("NavigationLinks")
+
+    def __str__(self):
+        return self.text
+
+    def get_absolute_url(self):
+        return reverse("NavigationLink_detail", kwargs={"pk": self.pk})

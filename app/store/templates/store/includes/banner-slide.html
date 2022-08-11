@@ -1,0 +1,57 @@
+<style>
+    /* modify slider indicator to circle */
+    .carousel-indicators [data-bs-target] {
+        --size: 0.5em;
+        --radius: 0.25em;
+        width: var(--size);
+        height: var(--size);
+        ;
+        border: 1px;
+        border-radius: var(--radius);
+    }
+
+    .carousel-indicators button.active {
+        background-color: rgb(20, 181, 130);
+        ;
+    }
+</style>
+
+
+<div id="home-page-banner" class="carousel slide mt-1 mx-0 mx-md-1" data-bs-ride="true">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#home-page-banner" data-bs-slide-to="0" class="active" aria-current="true"
+            aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#home-page-banner" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#home-page-banner" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <a href="#">
+                <img src="https://placeholder.pics/svg/900x300" class="d-block w-100" alt="...">
+            </a>
+
+        </div>
+        <div class="carousel-item">
+            <a href="#">
+                <img src="https://placeholder.pics/svg/900x300" class="d-block w-100" alt="...">
+            </a>
+
+        </div>
+        <div class="carousel-item">
+            <a href="#">
+                <img src="https://placeholder.pics/svg/900x300" class="d-block w-100" alt="...">
+            </a>
+
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
