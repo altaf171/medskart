@@ -1,0 +1,57 @@
+@import "./variables.scss";
+
+body {
+    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    color: var(--clr-text2);
+    background-color: hsl(300deg 40% 90%);
+}
+
+@import "./navbar.scss";
+@import "./navigation_links.scss";
+@import "./side-slide.scss";
+@import "./loginpage.scss";
+@import "./logged-out.scss";
+@import "./banner-slide.scss";
+
+
+input,input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"] {
+    // margin-top: 1rem;
+    color: var(--clr-text2);
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    // removing border and shadow from input field
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    border: none;
+    box-shadow: 0.2rem 0.2rem 0.7rem 0.2rem var(--clr-bg-lite1);
+    &:focus,
+    &:hover {
+        color: inherit;
+
+        // removing border and shadow from input field
+        border-color: inherit;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        border: none;
+        //addin custom shadow
+        // transform: scale(1.005);
+        // box-shadow: 0.2rem 0.2rem 0.7rem 0.2rem var(--clr-bg-lite2);
+        animation: input_field_animation 0.4s ease-in;
+        animation-fill-mode: forwards;
+    }
+}
+
+
+@keyframes input_field_animation {
+    from{
+    box-shadow: 0.2rem 0.2rem 0.7rem 0.2rem var(--clr-bg-lite1);
+
+    }
+    to{
+        box-shadow: 0.2rem 0.2rem 0.7rem 0.2rem var(--clr-bg-lite2);
+
+    }
+}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block body_content %}
+
+
+<div class="container-fluid logged-out">
+
+	<div class="card ">
+
+
+			<h4 class="card-title">Thank For The Visit!</h4>
+
+			<div class="card-body">
+
+            <h6>Be sure To Visit Us Again! <h6>
+
+            </div>
+
+            <div class="card-footer">
+                <div class='btn-custom'>
+                   <a href="{% url 'home-page' %}" class="btn">Back To Home Page</a>
+               </div>
+               <div class='btn-custom'>
+                <a href="{% url 'login' %}" class="btn">Login Again</a>
+            </div>
+
+            </div>
+	</div>
+</div>
+
+
+{% endblock body_content %}

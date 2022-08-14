@@ -165,3 +165,5 @@ nginx/Dockerfile
 media/
 
 temp.py
+app/store/static/medskart.code-workspace
+sass-run.txt

@@ -1,0 +1,95 @@
+// css for loginform and logged_out page and register page
+.login-form,
+.register-form,
+.logged-out {
+    padding-top: 5rem;
+
+    .card {
+        border: 0;
+        border-radius: 0;
+        max-width: 540px;
+        margin: auto;
+        padding-bottom: 0.5rem;
+        // box-shadow: 0 0.6rem 1rem 0.1rem var(--clr-bg-lite2);
+        opacity: 0; // for animation start with in visible
+        animation: animate_card_shadow 0.5s ease-in 0.5s;
+        animation-fill-mode: forwards;
+        .card-title {
+            font-weight: 600;
+            padding-top: 2rem;
+            text-align: center;
+        }
+
+        .card-body {
+            .input-group-text {
+                font-size: large;
+                color: var(--clr-text2);
+                background-color: transparent;
+                border: none;
+                box-shadow: 0.2rem 0.2rem 0.7rem 0.2rem var(--clr-bg-lite1);
+            }
+        }
+    }
+
+    .btn-custom {
+        position: relative;
+        width: 100%;
+        margin: 0.2rem 0 1.5rem;
+
+        button,
+        a {
+            color: var(--clr-text2-dark);
+            width: 100%;
+            border: none;
+            border-radius: 0;
+            box-shadow: -0.2rem 0.4rem 2rem 0.2rem var(--clr-bg-lite1);
+            &:hover,
+            &:focus {
+                // box-shadow: -0.2rem 0.4rem 1rem 0.2rem var(--clr-bg-lite2);
+                animation: login_btn_animate 0.4s ease-in;
+                animation-fill-mode: forwards;
+            }
+        }
+
+        // for bigger screen
+        @media only screen and (min-width: 576px) {
+            margin-top: 0;
+            margin-left: 1rem;
+        }
+    }
+
+    .login-btn {
+        margin-top: 0.2rem;
+        @media only screen and (min-width: 576px) {
+            margin-top: 1.2rem;
+        }
+    }
+}
+
+.login-form {
+    .input-group-text svg{
+        --size: 1.5rem;
+        width: var(--size);
+        height: var(--size);
+    }
+}
+
+@keyframes animate_card_shadow {
+    from {
+        box-shadow: 0 0 0 0 var(--clr-bg-lite1);
+        opacity: 0;
+    }
+    to {
+        box-shadow: 0 0.6rem 1rem 0.1rem var(--clr-bg-lite2);
+        opacity: 1;
+    }
+}
+
+@keyframes login_btn_animate {
+    from {
+        box-shadow: -0.2rem 0.4rem 2rem 0.2rem var(--clr-bg-lite1);
+    }
+    to {
+        box-shadow: -0.2rem 0.4rem 1rem 0.2rem var(--clr-bg-lite2);
+    }
+}

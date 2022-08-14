@@ -1,0 +1,37 @@
+.nav-second {
+
+    // background: linear-gradient(180deg, rgba(135, 135, 135, 0.2) 3%, rgba(135, 135, 135, 0.05) 100%);
+
+    .nav-second-link {
+        text-decoration: none;
+        color: rgb(32, 31, 31);
+        padding: 0.2rem 0.7rem;
+        margin: 0.1rem 0.2rem;
+
+        &:hover {
+            background-color: var(--clr-shadow1);
+            background-blend-mode: soft-light;
+        }
+
+    }
+
+
+    @media (max-width: 768px) {
+
+        // .nav-second-link {
+        //     min-width: 100vw;
+        //     margin-left: calc(var(--bs-gutter-x) * -.5);
+        //     padding-left: calc(var(--bs-gutter-x) * .5);
+
+        //     padding-top: 8px;
+        //     padding-bottom: 8px;
+
+        // }
+        .nav-second {
+            visibility: hidden;
+        }
+
+    }
+
+
+}

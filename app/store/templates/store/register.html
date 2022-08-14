@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body_content %}
+
+<div class="container register-form">
+
+    <div class="card ">
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <h4 class="card-title">USER REGISTRATION</h4>
+            <div class="card-body">
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text material-icons material-icons-outlined ">perm_identity</span>
+                    <input id="id_username" type="text" name="username" placeholder="Username..." class="form-control" required>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text material-icons material-icons-outlined">email</span>
+                    <input type="email" name="email" placeholder="Email..." class="form-control" required>
+                </div>
+
+                               
+                <div class="input-group mb-3">
+                    <span class="input-group-text material-icons material-icons-outlined">lock</span>
+                    <input type="password" name="password1" placeholder="Password..." class="form-control" required>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text material-icons material-icons-outlined">lock</span>
+                    <input type="password" name="password2" placeholder="Re-Enter Password..." class="form-control" required>
+                </div>
+
+                <div class="d-flex flex-column flex-sm-row ">
+                    <div class='btn-custom login-btn'>
+                        <button type="submit" class="btn">Register</button>
+                    </div>
+                    <div class='btn-custom'>
+                        <p class="py-0 my-0 ps-2" style="font-size: small;">Alredy Have an account?</p>
+                        <a href="{% url 'login' %}" class="btn">Login</a>
+                    </div>
+                </div>
+
+        </form>
+
+    
+    </div>
+</div>
+
+
+
+{% endblock body_content %}
+
+{% block link_js %}
+
+<script src="shop/registerPage.js"></script>
+
+{% endblock link_js %}

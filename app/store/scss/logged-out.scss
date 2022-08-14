@@ -1,0 +1,17 @@
+.logged-out{
+    .card-body{
+        text-align: center;
+        margin: auto;
+    }
+
+    .card-footer{
+        // removing default border , margin, border color
+        border: 0;
+        margin: 0;
+        background-color: transparent;
+        .btn-custom{
+            margin-left: 0; // it was inheriting some margin from login page css so i had to make it 0
+            margin-bottom: 0.5rem;
+        }
+    }
+}

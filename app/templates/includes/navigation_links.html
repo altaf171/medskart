@@ -1,39 +1,3 @@
-<style>
-
-
-    /*.nav-second {
-
-       // background: linear-gradient(180deg, rgba(135, 135, 135, 0.2) 3%, rgba(135, 135, 135, 0.05) 100%);
-    } */
-
-        
-
-    .nav-second-link {
-        text-decoration: none;
-        color: rgb(32, 31, 31);
-        padding: 0.2em 0.2em;
-        margin: 0.1em 0.2em;
-    }
-
-    .nav-second-link:hover {
-        /* color: rgba(20, 180, 130, 0.8); */
-        background-color: rgba(20, 180, 130, 0.1);
-        /* border-bottom: solid 1px rgba(20, 180, 130, 0.4); */
-    }
-
-
-    @media (max-width: 768px) {
-        .nav-second-link {
-            min-width: 100vw;
-            margin-left: calc(var(--bs-gutter-x) * -.5);
-            padding-left: calc(var(--bs-gutter-x) * .5);
-
-            padding-top: 8px;
-            padding-bottom: 8px;
-
-        }
-    }
-</style>
 <div class="nav-second navbar-expand-md">
     <div class="container-fluid pb-1 ">
         <div class="collapse multi-collapse collapse-horizontal navbar-collapse" id="nav-second-collapse">
@@ -46,6 +10,13 @@
                 <a class="nav-second-link">link3jajf</a>
                 <a class="nav-second-link">link4</a>
                 <a class="nav-second-link">link5ss</a> -->
+                <a href="#" role="button" class="nav-second-link" data-bs-toggle="modal" data-bs-target="#side-slide">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    stroke-width="2" style="width: 1.2rem; height:1.2rem;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                </a>
+
                 {% for link in navigation_links %}
 
                 <a class="nav-second-link" href="{{ link.link }}">

@@ -1,0 +1,79 @@
+:root {
+    --clr-bg: hsl(300, 95%, 36%);
+    --clr-bg-dark: hsl(300, 95%, 29%);
+    --clr-bg-lite1: hsla(300, 95%, 36%, 0.2);
+    --clr-bg-lite2: hsla(300, 95%, 36%, 0.4);
+
+    --clr-text: white;
+    // inter change colors for body 
+    --clr-text2: var(--clr-bg);
+    --clr-text2-dark: var(--clr-bg-dark);
+    --clr-bg2: var(--clr-text);
+    --clr-border: hsla(300, 95%, 36%, 0.4);
+    
+    --clr-shadow1:hsla(300, 84%, 24%, 0.1);
+    --clr-shadow2:hsla(300, 84%, 24%, 0.2);
+    --clr-shadow3:hsla(300, 84%, 24%, 0.3);
+    --clr-shadow4:hsla(300, 84%, 24%, 0.4);
+    --clr-shadow5:hsla(300, 93%, 24%, 0.5);
+    --clr-shadow6:hsla(300, 93%, 24%, 0.6);
+    --clr-shadow7:hsla(300, 84%, 7%, 0.7);
+
+
+
+    --nav-bar-bg: radial-gradient(
+            circle at 47% 14%,
+            rgba(205, 205, 205, 0.04) 0%,
+            rgba(205, 205, 205, 0.04) 43%,
+            transparent 43%,
+            transparent 100%
+        ),
+        radial-gradient(
+            circle at 35% 12%,
+            rgba(215, 215, 215, 0.04) 0%,
+            rgba(215, 215, 215, 0.04) 4%,
+            transparent 4%,
+            transparent 100%
+        ),
+        radial-gradient(
+            circle at 1% 35%,
+            rgba(24, 24, 24, 0.04) 0%,
+            rgba(24, 24, 24, 0.04) 37%,
+            transparent 37%,
+            transparent 100%
+        ),
+        radial-gradient(
+            circle at 21% 1%,
+            rgba(0, 0, 0, 0.04) 0%,
+            rgba(0, 0, 0, 0.04) 26%,
+            transparent 26%,
+            transparent 100%
+        ),
+        radial-gradient(
+            circle at 23% 82%,
+            rgba(249, 249, 249, 0.04) 0%,
+            rgba(249, 249, 249, 0.04) 60%,
+            transparent 60%,
+            transparent 100%
+        ),
+        radial-gradient(
+            circle at 11% 54%,
+            rgba(251, 251, 251, 0.04) 0%,
+            rgba(251, 251, 251, 0.04) 23%,
+            transparent 23%,
+            transparent 100%
+        ),
+        radial-gradient(
+            circle at 69% 68%,
+            rgba(234, 234, 234, 0.04) 0%,
+            rgba(234, 234, 234, 0.04) 10%,
+            transparent 10%,
+            transparent 100%
+        ),
+        linear-gradient(90deg, rgb(228, 46, 222), rgb(189, 61, 215));
+
+
+
+
+
+    }

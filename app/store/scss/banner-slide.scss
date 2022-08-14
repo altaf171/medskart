@@ -1,0 +1,17 @@
+.home-page-banner{
+     /* modify slider indicator to circle */
+     .carousel-indicators [data-bs-target] {
+        --size: 0.5em;
+        --radius: 0.25em;
+        width: var(--size);
+        height: var(--size);
+        ;
+        border: 1px;
+        border-radius: var(--radius);
+    }
+
+    .carousel-indicators button.active {
+        background-color: var(--clr-bg, magenta);
+        ;
+    }
+}

@@ -1,0 +1,122 @@
+
+.menu-container {
+    //button to close category menu
+    .close-menu-btn {
+        background-color: transparent;
+        border: none;
+        border-radius: 0;
+        position: fixed;
+        top: 50px;
+        left: 365px;
+
+        span {
+            margin-top: 5px;
+            color: var(--clr-text);
+            font-size: xxx-large;
+            text-shadow: 0px 0px 10px rgb(0, 0, 0);
+        }
+
+        @media screen and (max-width: 540px) {
+            left: 310px;
+        }
+
+        animation: close-menu-btn-slide 900ms ease-in;
+    }
+
+    .menu-canvas {
+        margin: 55px 0 0 0;
+        color: var(--clr-text2);
+        position: fixed;
+        background-color: var(--clr-bg2);
+        height: 100%;
+        width: 365px;
+        //setting background and applying opacity
+        &::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-color: var(--clr-bg);
+            opacity: 0.15;
+        }
+
+        @media screen and (max-width: 540px) {
+            width: 75vw;
+            min-width: 320px;
+            max-width: calc(100vw - 80px);
+        }
+        .modal-content {
+            // removing default css form bootstrap
+            border: none;
+            border-radius: 0;
+            background-color: transparent;
+        }
+        .menu-content {
+            height: 100%;
+            overflow-x: hidden;
+            .header {
+                color: var(--clr-text);
+                background-color: var(--clr-bg);
+                padding: 1rem 1rem 0.5rem 1rem;
+                display: flex;
+                flex-direction: row;
+                .company-name {
+                    padding-right: 1rem;
+                }
+                span {
+                    margin-left: auto;
+                    font-size: medium;
+                }
+            }
+            *.list-group-item {
+                color: var(--clr-text2);
+                background-color: transparent;
+                border-color: var(--clr-border);
+            }
+        }
+    }
+
+    animation: menubar-slide 0.5s ease-in; //slide category panel from left to right
+}
+
+.modal-backdrop.show {
+    animation: menubar-backdrop-fade-in 0.5s ease-in;
+}
+
+@keyframes menubar-slide {
+    from {
+        left: -400px;
+
+        // transform: scale(0);
+    }
+
+    to {
+        // transform: scale(1);
+        left: 0px;
+    }
+}
+
+@keyframes menubar-backdrop-fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.6;
+    }
+}
+
+// animation to close button when side bar slide in
+
+@keyframes close-menu-btn-slide {
+    from {
+        left: 0;
+        opacity: 0;
+    }
+    to {
+        left: 365;
+        @media screen and (max-width: 540px) {
+            left: 310px;
+        }
+        opacity: 1;
+    }
+}

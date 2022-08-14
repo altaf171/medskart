@@ -1,0 +1,99 @@
+<nav class="navbar navbar-expand-md topbar">
+    <div class="container-fluid ">
+
+        <div>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="modal" data-bs-target="#side-slide"
+                aria-controls="topbar" aria-expanded="false" aria-label="Toggle navigation">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+
+            </button>
+
+            <a class="navbar-brand" href="{% url 'home-page' %}"
+                style="color: rgb(4 131 68); font-size: x-large; font-weight: bolder;"> <span
+                    style="color: rgb(167, 3, 3); font-style: italic;">A</span>PHARMA</a>
+        </div>
+        <div class="small-screen d-flex flex-fill justify-content-end d-inline-flex d-md-none ">
+            <a href="#" class="nav-link shadow-none px-3">
+                <!-- user icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg> </a>
+            <a href="#" class="nav-link cart shadow-none px-3">
+                <!-- cart icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                <span class="badge sm">0</span>
+
+            </a>
+        </div>
+
+        <div
+            class="search-container d-flex flex-fill flex-md-wrap justify-content-start justify-content-md-center w-100">
+
+            <form class="d-flex mt-2 mt-md-0">
+                <input class="form-control " type="search" placeholder="Search" aria-label="Search">
+                <button class="btn me-0" type="submit">
+                    <svg class="ms-0 ms-md-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2" style="width: 1.3em; height: 1.3em;">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </button>
+            </form>
+        </div>
+
+        <div class="collapse navbar-collapse d-lg-flex flex-row justify-content-end topbar-items " id="topbar-item2">
+            <div class="navbar-nav px-1">
+                <a href="#" class="nav-link cart d-flex ms-1" id="#cart">
+                    
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span class="badge">0</span>
+                    <span class="ms-2">Cart</span>
+                </a>
+            </div>
+            <div class="navbar-nav px-1">
+                <a href="#" class="nav-link d-flex text-center ms-1" id="#user">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span class="ms-2">
+                        {% if user.is_authenticated %}
+                        {{user.username}}
+                        {% else %}
+                        Login
+
+                        {% endif %}
+                    </span>
+                </a>
+
+            </div>
+            {% comment %} <div class="navbar-nav">
+                {% if user.is_authenticated %}
+
+                <a href="{% url 'logout' %}" class="nav-link ms-1">logout</a>
+                {% else %}
+                <a href="{% url 'login' %}" class="nav-link ms-1" id="#log-in"> Login </a>
+
+
+                {% endif %}
+
+            </div> {% endcomment %}
+
+        </div>
+    </div>
+</nav>
