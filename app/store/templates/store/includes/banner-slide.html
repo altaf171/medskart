@@ -1,36 +1,40 @@
-<div id="home-page-banner" class="home-page-banner carousel slide mt-1 mx-0 mx-md-1" data-bs-ride="true">
+<div id="home-page-banner" class="home-page-banner carousel slide mt-1 mx-0 mx-md-1" data-bs-ride="carousel">
     <div class="carousel-indicators">
-        <button type="button" data-bs-target="#home-page-banner" data-bs-slide-to="0" class="active" aria-current="true"
-            aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#home-page-banner" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#home-page-banner" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        {% for banner in banners %}
+            {% if forloop.first %}
+            {% comment %} added active class for  first element {% endcomment %}
+            <button type="button" data-bs-target="#home-page-banner" data-bs-slide-to="{{ forloop.counter0 }}" class="active" aria-current="true"
+            aria-label="Slide {{ forloop.counter }}"></button>
+
+            {% else %}
+            <button type="button" data-bs-target="#home-page-banner" data-bs-slide-to="{{ forloop.counter0 }}"aria-current="true"
+            aria-label="Slide {{ forloop.counter }}"></button>
+
+            {% endif %}
+            
+        {% endfor %}
+    
     </div>
     <div class="carousel-inner">
-        <div class="carousel-item active">
-            <a href="#">
-                <img src="https://placeholder.pics/svg/900x300" class="d-block w-100" alt="...">
-            </a>
-
-        </div>
-        <div class="carousel-item">
-            <a href="#">
-                <img src="https://placeholder.pics/svg/900x300" class="d-block w-100" alt="...">
-            </a>
-
-        </div>
-        <div class="carousel-item">
-            <a href="#">
-                <img src="https://placeholder.pics/svg/900x300" class="d-block w-100" alt="...">
-            </a>
-
-        </div>
+            {% for banner in banners %}
+            {% if forloop.first %}
+                <div class="carousel-item active" data-bs-interval="3000">
+            {% else %}
+                <div class="carousel-item" data-bs-interval="2000">
+            {% endif %}
+                <a href="/{{ banner.link }}">
+                    <img src="{{ banner.image }}" class="banner-img" alt="...">
+                </a>
+            </div>
+                
+            {% endfor %}
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+    <button class="carousel-control-prev" type="button" data-bs-target="#home-page-banner"
         data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+    <button class="carousel-control-next" type="button" data-bs-target="#home-page-banner"
         data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>

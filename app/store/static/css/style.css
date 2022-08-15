@@ -445,6 +445,11 @@ body {
 .home-page-banner .carousel-indicators button.active {
   background-color: var(--clr-bg, magenta);
 }
+.home-page-banner .banner-img {
+  display: block;
+  width: 100%;
+  height: 18rem;
+}
 
 input, input[type=text],
 input[type=email],

@@ -12,6 +12,14 @@
 
     .carousel-indicators button.active {
         background-color: var(--clr-bg, magenta);
-        ;
+    
     }
+
+    .banner-img{
+        display: block;
+        width: 100%;
+        height: 18rem;
+        // use image height of 280px;
+    }
+
 }

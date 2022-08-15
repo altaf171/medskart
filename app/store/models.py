@@ -1,3 +1,4 @@
+from email.mime import image
 from unicodedata import name
 from django.utils.text import slugify
 from djmoney.models.fields import MoneyField
@@ -175,3 +176,22 @@ class NavigationLink(models.Model):
 
     def get_absolute_url(self):
         return reverse("NavigationLink_detail", kwargs={"pk": self.pk})
+
+# ----------  banner silde ----------
+
+class Banner(models.Model):
+    """
+    banner image for slide and their link
+
+    """
+    image = models.ImageField(_("Banner Image"), upload_to="banner-images/", height_field=None, width_field=None, max_length=None)
+    link = models.CharField(_("Banner link"), max_length=80)
+    class Meta:
+        verbose_name = _("Banner")
+        verbose_name_plural = _("Banners")
+
+    def __str__(self):
+        return self.link
+
+    def get_absolute_url(self):
+        return reverse("Banner_detail", kwargs={"pk": self.pk})
