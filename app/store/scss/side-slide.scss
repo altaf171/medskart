@@ -1,5 +1,5 @@
-
 .menu-container {
+
     //button to close category menu
     .close-menu-btn {
         background-color: transparent;
@@ -24,12 +24,14 @@
     }
 
     .menu-canvas {
+        
         margin: 55px 0 0 0;
         color: var(--clr-text2);
         position: fixed;
         background-color: var(--clr-bg2);
         height: 100%;
         width: 365px;
+
         //setting background and applying opacity
         &::before {
             content: "";
@@ -45,34 +47,67 @@
             min-width: 320px;
             max-width: calc(100vw - 80px);
         }
+
         .modal-content {
             // removing default css form bootstrap
             border: none;
             border-radius: 0;
             background-color: transparent;
         }
+
         .menu-content {
             height: 100%;
             overflow-x: hidden;
+
+
             .header {
                 color: var(--clr-text);
                 background-color: var(--clr-bg);
-                padding: 1rem 1rem 0.5rem 1rem;
+                padding: 1rem 0.5rem 0.5rem 0.2rem;
                 display: flex;
                 flex-direction: row;
+
                 .company-name {
                     padding-right: 1rem;
                 }
+
                 span {
                     margin-left: auto;
                     font-size: medium;
                 }
+
+                .nav-link>svg {
+                    --size: 1.5rem;
+                    width: var(--size);
+                    height: var(--size);
+                }
+
+                .nav-link span{
+                    font-size: 0.75rem;
+                }
+
             }
-            *.list-group-item {
+
+            
+
+            & .list-group-item {
+                font-weight: normal;
                 color: var(--clr-text2);
                 background-color: transparent;
-                border-color: var(--clr-border);
+                // border-color: var(--clr-border);
+                border: none;
+
+
             }
+
+            & .list-group-item.section-title{
+                font-weight: bolder;
+                border-bottom: 2px solid;
+                border-color: var(--clr-border);
+            
+
+            }
+           
         }
     }
 
@@ -100,6 +135,7 @@
     from {
         opacity: 0;
     }
+
     to {
         opacity: 0.6;
     }
@@ -112,11 +148,14 @@
         left: 0;
         opacity: 0;
     }
+
     to {
         left: 365;
+
         @media screen and (max-width: 540px) {
             left: 310px;
         }
+
         opacity: 1;
     }
 }
