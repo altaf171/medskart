@@ -23,7 +23,8 @@
                     stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg> </a>
+                </svg>
+            </a>
             <a href="#" class="nav-link cart shadow-none px-3">
                 <!-- cart icon -->
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -54,7 +55,7 @@
         <div class="collapse navbar-collapse d-lg-flex flex-row justify-content-end topbar-items " id="topbar-item2">
             <div class="navbar-nav px-1">
                 <a href="#" class="nav-link cart d-flex ms-1" id="#cart">
-                    
+
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                         stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -65,33 +66,31 @@
                 </a>
             </div>
             <div class="navbar-nav px-1">
-                <a href="#" class="nav-link d-flex text-center ms-1" id="#user">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                        stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span class="ms-2">
-                        {% if user.is_authenticated %}
-                        {{user.username}}
-                        {% else %}
-                        Login
-                        {% endif %}
-                    </span>
-                </a>
-
-            </div>
-            {% comment %} <div class="navbar-nav">
                 {% if user.is_authenticated %}
-
-                <a href="{% url 'logout' %}" class="nav-link ms-1">logout</a>
+                    <a href="{{ user.name }}" class="nav-link d-flex text-center ms-1" id="#user">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="ms-2">
+                            {{ user.name|truncatechars:9 }}
+                        </span>
                 {% else %}
-                <a href="{% url 'login' %}" class="nav-link ms-1" id="#log-in"> Login </a>
-
-
+                    <a href="{% url 'login' %}" class="nav-link d-flex text-center ms-1" id="#user">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="ms-2">
+                        login
+                        </span>
                 {% endif %}
 
-            </div> {% endcomment %}
+                    </a>
+
+            </div>
 
         </div>
     </div>
